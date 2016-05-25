@@ -1,6 +1,6 @@
 # docker-pdfgenerator
 
-A dockerized version of Kisio Digital's PDF Generator.
+A dockerized version of Kisio Digital's [PDF Generator](https://github.com/CanalTP/pdfGenerator).
 
 ## Usage
 
