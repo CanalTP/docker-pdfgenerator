@@ -1,0 +1,17 @@
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+
+    DocumentRoot /var/www/pdfGenerator/web/
+
+    DirectoryIndex index.php
+
+    <Directory /var/www/pdfGenerator/web/>
+        AllowOverride None
+        Allow from All
+    </Directory>
+
+    ErrorLog /var/log/apache2/error.log
+    CustomLog /var/log/apache2/access.log common
+    AddDefaultCharset utf-8
+
+</VirtualHost>
