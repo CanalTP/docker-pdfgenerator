@@ -21,11 +21,12 @@ RUN curl -sS https://getcomposer.org/installer | php -- --filename=composer --in
 ADD apache2_pdfgenerator.local /etc/apache2/sites-available/pdfgenerator.local.conf
 RUN a2ensite pdfgenerator.local.conf && a2dissite default
 
-RUN mkdir -p /var/www/pdfGenerator && \
-    curl -L 'https://github.com/CanalTP/pdfGenerator/archive/0.0.2.tar.gz' \
-    | tar xz -C /var/www/pdfGenerator --strip-component 1
+COPY tmp/ /var/www/
 
-RUN cd /var/www/pdfGenerator && SYMFONY_ENV=prod composer install -on --prefer-dist --no-dev && rm -rf /root/.composer
+RUN cd /var/www/pdfGenerator && \
+    chown -R www-data: /var/www/pdfGenerator && \
+    su www-data -c "SYMFONY_ENV=prod composer install -on --prefer-dist --no-dev" && \
+    rm -rf /var/www/.composer
 
 EXPOSE 80
 CMD ["/run.sh"]
